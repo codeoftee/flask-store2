@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Welcome to flask shop
+        </title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/flask-store.css')}}">
+
+    </head>
+
+    <body>
+        <h1>Flask Shop</h1>
+        <div style="color: red; margin: 5px; text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        {% if current_user is not none %}
+            <h1>Welcome {{current_user.username}}</h1>
+            <p><a href="/add-product">Add Product</a></p>
+            <p><a href="/logout">Logout</a></p>
+        {% else %}
+            <ul style="list-style-type: none;">
+                <li><a href="/login">Login</a></li>
+
+                <li><a href="/sign-up">Sign Up</a></li>
+            </ul>
+        {% endif %}
+
+        {% for product in products %}
+        <div style="border: 1px solid red; margin: 10px; display: inline-block;">
+            <img src="/uploads/{{product.image}}" style="height: 100px;">
+            <h4>{{product.title}}</h4>
+            <p>{{product.price}}</p>
+            <a href="/edit/{{product.id}}"><button class="btn btn-primary">Edit</button></a>
+            <a href="/delete/{{product.id}}"><button class="btn btn-danger">Delete</button></a>
+        </div>
+        {% endfor %}
+    </body>
+</html>

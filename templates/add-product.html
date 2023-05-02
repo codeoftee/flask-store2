@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add product</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/flask-store.css')}}">
+
+</head>
+
+<body>
+<div class="container">
+    <div class="center-div">
+        
+        <h4>Add Product</h4>
+        <div style="color: red; margin: 5px; text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form method="post" action="/add-product" enctype="multipart/form-data">
+            <input type="text" name="title" class="form-control" placeholder="Enter title">
+            <br/>
+            <input type="number" name="price" class="form-control" placeholder="Enter price">
+            <br/>
+            <input type="text" name="category" class="form-control" placeholder="Enter category">
+            <br/>
+            <textarea name="description" class="form-control" rows="3">Enter product description.</textarea>
+
+            <input type="file" name="picture" class="form-control">
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

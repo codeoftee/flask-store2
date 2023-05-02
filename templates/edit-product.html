@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit product</title>
+</head>
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/flask-store.css')}}">
+
+<body>
+<div class="container">
+    <div class="center-div">
+        
+        <h4>Edit Product</h4>
+        <div style="color: red; margin: 5px; text-align: center;">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <b>{{ message }}</b>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        <form method="post" action="/edit/{{product.id}}" enctype="multipart/form-data">
+            <input value="{{product.title}}" type="text" name="title" class="form-control" placeholder="Enter title">
+            <br/>
+            <input value="{{product.price}}" type="number" name="price" class="form-control" placeholder="Enter price">
+            <br/>
+            <input value="{{product.category}}" type="text" name="category" class="form-control" placeholder="Enter category">
+            <br/>
+            <textarea  name="description" class="form-control" rows="3">{{product.description}}</textarea>
+
+            <input type="file" name="picture" class="form-control">
+            <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
