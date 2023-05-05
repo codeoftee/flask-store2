@@ -4,3 +4,4 @@ migrations
 /venv/
 store.db
 /uploads
+**/__pycache__
